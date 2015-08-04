@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Club Mars RC - Calendriers</title>
+    <meta content="no-cache" http-equiv="Pragma" />
+    <meta content="-1" http-equiv="Expires" />
+    <link rel="stylesheet" type="text/css" href="mainstyle.css" /><!-- jQuery library - I get it from Google API's -->
+    <script type="text/javascript" src="js/jquery-1.6.1.min.js"></script><!-- jQuery UI widget factory -->
+    <script type="text/javascript" src="js/jquery-ui-1.8.11.custom.min.js"></script>
+    <script type="text/javascript" src="js/menu.js"></script>
+    <script type="text/javascript" src="js/fullcalendar.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/fullcalendar.css" />
+    <link rel="stylesheet" type="text/css" href="css/fullcalendar.print.css" media="print" />
+    <link rel="stylesheet" type="text/css" href="cupertino/theme.css" />
+
+
+    <script type="text/javascript">
+
+	  $(document).ready(function() {
+
+        menuSlider.init('menu','slide');
+
+		var date = new Date();
+		var d = date.getDate();
+		var m = date.getMonth();
+		var y = date.getFullYear();
+
+		$('#calendar').fullCalendar({
+			theme: true,
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,agendaWeek,agendaDay'
+			},
+			editable: false,
+			events: [
+				{
+				  
+                    title: 'Réunion Mensuel',
+					start: new Date(2012, 1, 27),
+				    url: 'events.html'
+				}
+			]
+		});
+
+	});
+
+  </script>
+
+    <style type="text/css">
+    #calendar {
+		  width: 600px;
+		  margin: 0 auto;
+		}
+    </style>
+  </head>
+
+  <body>
+    <div id="top"><br />&nbsp;&nbsp;<img src="images\Logo3.png" />
+      <div style="position: absolute; width: 100%; top: 127px">
+        <div class="menu">
+          <ul id="menu">
+            <li><a href="index.html">Accueil</a> </li>
+            <li value="1"><a href="calendar.html">Calendrier</a> </li>
+            <li><a href="formulaires.html">Formulaires</a> </li>
+            <li><a href="photos.html">Photos</a> </li>
+            <li><a href="events.html">&Eacute;v&eacute;nements</a> </li>
+            <li><a href="#">Membres</a> </li>
+            <li><a href="executif.html">Ex&eacute;cutif</a> </li>
+            <li><a href="maps.html">Terrain</a> </li>
+            <li><a href="contact.html">Nous Contacter</a> </li>
+          </ul>
+          <div id="slide">&nbsp;</div>
+        </div>
+      </div>
+    </div>
+    <p>&nbsp;</p>
+    <div id="calendar">&nbsp;</div>
+  </body>
+</html>

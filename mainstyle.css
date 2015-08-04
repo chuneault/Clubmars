@@ -1,0 +1,316 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    /* padding: 0; */
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+body {
+ font:14px Arial, sans-serif;
+}
+
+.clublogo {
+  padding-top: 5px;
+  padding-left: 5px;
+}
+
+#top {
+ background: transparent url(images/cloud-bg.png) repeat-x 40%;
+ width: 100%;
+ height: 189px;
+}
+
+#jq-membernav {
+  background: #192839 url(images/bg_primaryNav_left.gif) left bottom no-repeat;
+  width: 100%;
+  float: left;
+
+}
+
+#jq-membernav div.jq-member {
+  position: relative;
+  float: left;
+  line-height: 25px;
+  font-size: 2.2em;
+  color: #fff;
+  text-decoration: none;
+    margin-bottom: 2px;
+    margin-top: 7px;
+    margin-left: 5px;
+}
+
+
+#jq-membernav ul {
+  float: right;
+  background: url(images/bg_primaryNav_right.gif) right bottom no-repeat;
+  padding: 0 .8em 2px;
+  margin: 0;
+}
+
+#jq-membernav li {
+float: left;
+list-style: none;
+margin: 0;
+background: none;
+padding: 0;
+}
+
+
+#jq-membernav li  {
+
+  margin-top: 5px;
+  padding-right: 5px;
+}
+
+#jq-membernav li.jq-borderright {
+border-right: 1px solid #0F1924;
+}
+
+#jq-membernav li.jq-current a, #jq-membernav li.jq-current a:hover {
+	border-bottom: 2px solid #176092;
+	background: #192839;
+	margin-bottom: 0;
+	cursor: default;
+	color: #D0D0D0;
+}
+
+#jq-membernav li a:hover {
+color: #fff;
+border-bottom: 2px solid #4082ae;
+margin-bottom: 0;
+}
+
+#jq-membernav li img{
+    height: 35px;
+}
+
+
+
+html {
+  background-color: #E9F0F5;
+
+}
+
+ul {
+   list-style-position: inside;
+}
+
+img {
+ border: none;
+}
+
+
+.menu {
+     font-weight:bold;
+	 position: relative;
+     //background:url(images/menubg2.png) no-repeat;
+	 left: 220px;
+	 top: -30px;
+     height:35px;
+	 width:455px;
+     background: #0095DA;
+    border-radius: 8px;
+}
+
+.menu ul {list-style:none; z-index:10; position:absolute; z-index:100; padding:9px 5px}
+.menu li {float:left}
+.menu a, .menu a:active, .menu a:visited, .menu a:hover {text-decoration:none; color:#FFFFFF; padding:10px}
+#slide {position:absolute; top:6px; height:24px; background:#0A0C73; z-index:10; border-radius: 8px;}
+
+#makeMeScrollable {
+	width:100%;
+	position: relative;
+}
+
+#makeMeScrollable div.scrollableArea * {
+	border: none;
+	position: relative;
+	float: left;
+}
+
+.subPanel {
+	font-size: 12px;
+	font-family: Calibri, Courier, Sans-Serif;
+}
+
+.subPanel span {
+  	color: Blue;
+		text-decoration: underline;
+		cursor: pointer;
+}
+
+.subPanel span.notClickable {
+	color: inherit;
+  text-decoration: none;
+	cursor: inherit;
+}
+
+		.subPanel {
+			background: #efefef;
+			padding: 7px;
+			margin-bottom: 5px;
+		}
+
+		#makeMeScrollable div.scrollableArea .contentBox {
+			height: 308px;
+			width: 200px;
+			border: solid 1px #ccc;
+			padding: 10px;
+			margin: 0px 5px;
+		}
+
+		#makeMeScrollable div.scrollableArea .contentBox img {
+			margin-bottom: 10px;
+		}
+
+
+    .maincontent {
+       width: 1060px;
+       margin-left: auto;
+	     margin-right: auto;
+       padding-top: 10px;
+    }
+
+    .maindiv {
+      float: left;
+      width: 750px;
+    }
+
+    .mainpanel {
+		   position: relative;
+		   width: 100%;
+       float: left;
+       padding-top: 10px;
+		  }
+
+		 .mainpanel div.content {
+			 border:2px solid #90B2CF;
+		   background-color: #ADC7DC;
+		   -webkit-border-radius: 8px;
+			 -moz-border-radius: 8px;
+			 border-radius: 8px;
+		   box-shadow: 7px 7px 3px #888;
+			 color: #000065;
+		  }
+
+    .mainpanel div.content p {
+     display: block;
+     padding-top: 3px;
+     padding-bottom: 3px;
+
+    }
+    .mainpanel div.content h1 {
+       padding-left: 10px;
+    	 -webkit-border-radius: 8px;
+			 -moz-border-radius: 8px;
+			 border-radius: 8px;
+			 width: 98.5%;
+			 font:18px Arial, sans-serif;
+			 color: #FFFFFF;
+			 font-weight:bold;
+			 background-color: #099DFC;
+		  }
+
+		  .mainpanel div.content h1 label {
+			 float: right;
+			 padding-right: 8px;
+			 padding-top: 2px;
+			 font:14px Arial, sans-serif;
+       }
+
+		  .contentdesc {
+        padding-left: 5px;
+		  }
+
+    .rightdiv {
+      padding-left: 10px;
+      float: left;
+      width: 300px;
+
+    }
+
+
+    .eventdiv {
+       margin-left: auto;
+	     margin-right: auto;
+       width: 250px;
+    }
+
+    .eventdiv img {
+
+    }
+
+    /*
+    .editevent {
+      width: 24px;
+      height: 24px;
+      background:url(images/edit_small.png) no-repeat;
+      float: left;
+    }*/
+
+    /*.editevent:hover {
+      background:url(images/edit_small_over.png) no-repeat;
+    }*/
+
+
+    .sponserdiv {
+      padding-top: 10px;
+    }
+
+    .sponserdiv img {
+      width: 300px;
+    }
+
+    .meteodiv {
+       padding-top: 10px;
+       margin-left: auto;
+	     margin-right: auto;
+       width: 174px;
+    }
+
+      #divmemberprofil {
+       font:16px Arial, sans-serif;
+			 color: #FFFFFF;
+			 background-color: #099DFC;
+       width: 100%;
+       diplay: block;
+      }
+      #divmemberprofil p {
+        font-weight:bold;
+      }
+      #divmemberprofil label {
+
+        color: #0A0C73;
+      }
+      #divmemberprofil label:hover {color:white; background-color: #0A0C73;}
+      #divmemberprofil a {
+        text-decoration: none;
+
+        color: #0A0C73;
+      }
+      #divmemberprofil a:hover {color:white; background-color: #0A0C73;}
+
+.btnloginmember {
+    right: 0px;
+    position: absolute;
+    top: 10px;
+    padding-right: 10px;
+}
+
+.btnfacebook {
+    right: 0px;
+    position: absolute;
+    top: 80px;
+    padding-right: 10px;
+}

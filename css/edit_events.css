@@ -1,0 +1,69 @@
+#editevents-modal { color:#bbb; background-color:#333; border:4px solid #444; padding:7px; width: 750px;}
+
+
+.errordiv {
+   padding-top: 9px;
+   text-align: center;
+   color: red;
+  }
+
+.eventform .labelfield {
+ clear:left;
+ display:block;
+ float:left;
+ width: 50px;
+ font-size: 1em;
+}
+
+#eventtitle {
+  width: 100%;
+}
+
+.eventform p {
+ margin: 0;
+ padding:0;
+}
+
+.eventform input.error {
+   border: 2px solid red;
+}
+
+.eventform p {
+  padding-bottom: 5px;
+}
+
+.eventform button {
+  background:#d76300;
+  border:0;
+  color:#fff;
+  cursor:pointer;
+  font-size:16px;
+  font-weight:bold;
+  height:26px;
+  margin:4px 0 0 4px;
+  text-align:center;
+  vertical-align:middle;
+  -webkit-border-radius:8px;
+  -moz-border-radius:8px;
+  border-radius:8px;
+  padding: 3px;
+
+}
+
+.eventform button:hover {background:#f49000;}
+
+.editevent {
+  float: left;
+
+  padding-right: 5px;
+  position: relative;
+  top: -5px;
+}
+.editevent img {
+  height: 25px;
+}
+
+.editevent img:hover {
+  cursor: pointer;
+}
+
