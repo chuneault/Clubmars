@@ -16,7 +16,7 @@
 
         $servername = constant::server;
 
-        $servername =  'clubmars.org';
+        //$servername =  'clubmars.org';
 
         global $connection;
          // Establish Connection
