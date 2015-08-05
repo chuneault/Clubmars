@@ -9,8 +9,8 @@
 
   connectClubMarsDb();
 
-  $newtitle = str_replace('\'', '\\\'', utf8_decode($_POST['eventtitle']));
-  $newdesc = str_replace('\'', '\\\'', utf8_decode($_POST['desc']));
+  $newtitle = str_replace('\'', '\\\'', $_POST['eventtitle']);
+  $newdesc = str_replace('\'', '\\\'', $_POST['desc']);
   $eventid = $_POST['event_id'];
 
   $sql = 'update events set title = \'' .$newtitle .'\', description = \'' .$newdesc .'\' where event_id = ' .$eventid;
@@ -19,7 +19,7 @@
 
   if ($ok) {
    $result['result'] = 'true';
-   $result['msg'] = htmlentities('Sauvegardé');
+   $result['msg'] = htmlentities('SauvegardÃ©');
   } else {
     $result['result'] = 'false';
   }

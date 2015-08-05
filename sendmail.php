@@ -96,7 +96,7 @@ function fixGlobalFilesArray($files) {
 
      connectClubMarsDb();
 
-     $subject =   str_replace('\'', '\\\'', utf8_decode($_POST['subject']));
+     $subject =   str_replace('\'', '\\\'', $_POST['subject']);
      $event_date = $_POST['publish_date'];
      $publish_main = 0;
      if (isset($_POST['publish_main']))
@@ -105,7 +105,7 @@ function fixGlobalFilesArray($files) {
      if ($publish_main != 1)
        $publish_main = 0;
 
-    $bodymsg = str_replace('\'', '\\\'', utf8_decode($bodymsg));
+    $bodymsg = str_replace('\'', '\\\'', $bodymsg);
 
      $sql = 'INSERT INTO events (`event_date`, `title`, `description`, `active`, `show_main_page`)
             VALUES (\'' .$event_date .'\', \'' .$subject .'\', \''.$bodymsg . '\', 1, ' .$publish_main .')';
