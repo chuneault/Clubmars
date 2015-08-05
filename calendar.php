@@ -1,5 +1,4 @@
 <?php
- header('Content-Type: text/html; charset=ISO-8859-1');
  session_start();
 ?>
 
@@ -8,13 +7,12 @@
 
     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
     <META HTTP-EQUIV="PRAGMA" CONTENT="NO-CACHE">
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 
     <title>Club Mars RC - Calendriers</title>
     <link rel="stylesheet" type="text/css" href="mainstyle.css" /><!-- jQuery library - I get it from Google API's -->
 
-    <script src="js/jquery-1.7.1.min.js" type="text/javascript"></script>
-    <script src="js/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script>
+    <script src="js/jquery-2.1.3.min.js" type="text/javascript"></script>
+    <script src="js/jquery-ui-1.9.1.custom.min.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="css/dot-luv/jquery-ui-1.8.18.custom.css" />
 
 
@@ -70,37 +68,37 @@
         $eventslist = array();
 
 
-        $result = mysql_query('select * from calendar;') or die(mysql_error());
-        while ($row = mysql_fetch_assoc($result)) {
+        $result = mysqli_query($connection, 'select * from calendar;') or die(mysqli_error($connection));
+        while ($row = mysqli_fetch_assoc($result)) {
 
            $eventslist[] = array(
-                    'title' => utf8_encode($row['event_name']),
+                    'title' => $row['event_name'],
                     'color' => '#0A0C73',
                     'textColor' => 'white',
                     'start' =>  $row['event_date'],
                     'url' => 'events.php',
-                    'description' => utf8_encode($row['event_desc'])
+                    'description' => $row['event_desc']
                    );
         }
 
 
-        mysql_free_result($result);
+        mysqli_free_result($result);
 
         //séance de formation
-        $result = mysql_query('select trainsessions.*, members.member_color, members.first_name, members.last_name from trainsessions, members where trainsessions.member_id = members.member_id;') or die(mysql_error());
-        while ($row = mysql_fetch_assoc($result)) {
+        $result = mysqli_query($connection, 'select trainsessions.*, members.member_color, members.first_name, members.last_name from trainsessions, members where trainsessions.member_id = members.member_id;') or die(mysqli_error($connection));
+        while ($row = mysqli_fetch_assoc($result)) {
             $eventslist[] = array(
                     'title' => 'Formation',
                     'color' => '#' .$row['member_color'],
                     'textColor' => 'white',
                     'start' =>  $row['start_date'],
                     'url' => 'trainsession.php?sessionId=' .$row['session_id'],
-                    'description' => 'Formation donnée par ' .utf8_encode($row['first_name']) .' à partir de ' .$row['start_time']
+                    'description' => 'Formation donnée par ' .$row['first_name'] .' à partir de ' .$row['start_time']
                    );
         }
 
-        mysql_free_result($result);
-        mysql_close();
+        mysqli_free_result($result);
+        mysqli_close($connection );
 
         echo json_encode($eventslist);
 

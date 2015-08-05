@@ -57,8 +57,8 @@
        require("constant.php");
        connectClubMarsDb();
 
-       $result = mysql_query('select * from events where event_id = ' .$_GET['id']) or die(mysql_error());
-       $row = mysql_fetch_assoc($result);
+       $result = mysqli_query($connection, 'select * from events where event_id = ' .$_GET['id']) or die(mysqli_error($connection));
+       $row = mysqli_fetch_assoc($result);
 
      ?>
 
@@ -73,16 +73,16 @@
        <p>
          <label class="labelfield" for="eventtitle">Titre:</label>
          <input type="text" id="eventtitle" name="eventtitle" class="required ui-widget-content" tabindex="1001"
-            value="<?php echo utf8_encode($row["title"])?>"
+            value="<?php echo $row["title"]?>"
           />
        </p>
 
        <p>
         <textarea class="tinymce" cols="80" rows="10" name="desc" id="desc">
         <?php
-          echo utf8_encode($row["description"]);
-          mysql_free_result($result);
-          mysql_close();
+          echo $row["description"];
+          mysqli_free_result($result);
+          mysqli_close($connection );
         ?>
 
         </textarea>

@@ -4,6 +4,8 @@
 
  require("constant.php");
 
+ header('Content-Type: application/json');
+
  connectClubMarsDb();
 
  $updatefields = json_decode(stripslashes($_POST["updatefields"]));
@@ -13,10 +15,10 @@
 
     switch ($fields->fieldtype) {
       case "text":
-        $update_sql .= ", " .$fields->fieldname ." = '" .mysql_real_escape_string($_POST[$fields->fieldname]) ."' ";
+        $update_sql .= ", " .$fields->fieldname ." = '" .mysqli_real_escape_string($connection, $_POST[$fields->fieldname]) ."' ";
         break;
       case "bool":
-        $update_sql .= ", " .$fields->fieldname ." = " .($_POST[$fields->fieldname] != null ? '1 ' : '0 ');
+        $update_sql .= ", " .$fields->fieldname ." = " .(isset($_POST[$fields->fieldname])  ? '1 ' : '0 ');
         break;
     }
  }
@@ -31,7 +33,7 @@
       if  ($_SESSION['profil']['password'] != $_POST['current_password']) {
         $result["msg"] = htmlentities("Votre mot de passe courant ne correspond pas");
         echo json_encode($result);
-        mysql_close();
+        mysqli_close($connection );
         exit;
       } else {
        $update_sql .= ", password = '" .$_POST['confirm_password'] ."'";
@@ -44,8 +46,8 @@
 
  $update_sql .= "WHERE member_id = " .$_SESSION["profil"]["member_id"];
 
-  if (!mysql_query($update_sql)) {
-     $result["msg"] = mysql_error();
+  if (!mysqli_query($connection, $update_sql)) {
+     $result["msg"] = mysqli_error($connection);
   } else {
     $result["result"] = "true";
       if (isset($_POST['member_username']) && strlen($_POST['member_username']) > 0) {
@@ -58,6 +60,6 @@
 
   echo json_encode($result);
 
-  mysql_close();
+  mysqli_close($connection );
 
 ?>

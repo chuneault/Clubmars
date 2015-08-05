@@ -15,7 +15,7 @@
 
   $sql = 'update events set title = \'' .$newtitle .'\', description = \'' .$newdesc .'\' where event_id = ' .$eventid;
 
-  $ok = mysql_query($sql) or die(mysql_error());
+  $ok = mysqli_query($connection, $sql) or die(mysqli_error($connection));
 
   if ($ok) {
    $result['result'] = 'true';
@@ -24,7 +24,7 @@
     $result['result'] = 'false';
   }
 
-  mysql_close();
+  mysqli_close($connection );
 
   echo json_encode($result);
 

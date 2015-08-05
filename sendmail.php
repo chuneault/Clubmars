@@ -57,21 +57,21 @@ function fixGlobalFilesArray($files) {
       if ($_POST['toemail'] == "allmemberspublic") {
         $sql .= ' and public_email = 1';
       }
-      $member = mysql_query($sql) or die(mysql_error());
-      while ($row = mysql_fetch_assoc($member)) {
+      $member = mysqli_query($connection, $sql) or die(mysqli_error($connection));
+      while ($row = mysqli_fetch_assoc($member)) {
         $to[] = array('email' => $row['email'], 'name' => $row['first_name'] .', ' .$row['last_name']);
       }
-      mysql_free_result($member);
-      mysql_close();
+      mysqli_free_result($member);
+      mysqli_close($connection );
 
     }
     else {
       $sql = 'SELECT email, first_name, last_name FROM clubm532_master.members where maac = "' .$_POST['toemail'] .'"';
-      $member = mysql_query($sql) or die(mysql_error());
-      if ($row = mysql_fetch_assoc($member))
+      $member = mysqli_query($connection, $sql) or die(mysqli_error($connection));
+      if ($row = mysqli_fetch_assoc($member))
         $to[] = array('email' => $row['email'], 'name' => $row['first_name'] .', ' .$row['last_name']);
-      mysql_free_result($member);
-      mysql_close();
+      mysqli_free_result($member);
+      mysqli_close($connection );
     }
 
     $resultsendmail = sendmail($to, $_POST['subject'], $bodymsg, $files, $_POST['fromemail']);
@@ -110,11 +110,11 @@ function fixGlobalFilesArray($files) {
      $sql = 'INSERT INTO events (`event_date`, `title`, `description`, `active`, `show_main_page`)
             VALUES (\'' .$event_date .'\', \'' .$subject .'\', \''.$bodymsg . '\', 1, ' .$publish_main .')';
 
-     $ok = mysql_query($sql) or die(mysql_error());
+     $ok = mysqli_query($connection, $sql) or die(mysqli_error($connection));
 
      $result['result'] = 'true';
 
-     mysql_close();
+     mysqli_close($connection );
   }
 
   $result = (object)$result;

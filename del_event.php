@@ -9,9 +9,9 @@
 require("constant.php");
 connectClubMarsDb();
 
-$result = mysql_query('delete from events where event_id = ' .$_POST['id']) or die(mysql_error());
+$result = mysqli_query($connection, 'delete from events where event_id = ' .$_POST['id']) or die(mysqli_error($connection));
 
-mysql_close();
+mysqli_close($connection );
 
 if ($result)
   echo "ok";

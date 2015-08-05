@@ -10,37 +10,41 @@ require("../constant.php");
 
 connectClubMarsDb();
 
-$result = mysql_query('select * from members where public_email = 1 order by last_name DESC') or die(mysql_error());
+$result = mysqli_query($connection, 'select * from members order by last_name DESC') or die(mysqli_error($connection));
 $data = new StdClass;
 
-$memberList = array();;
+$memberList = array();
+
 $rowCount = 0;
+$pageCount = 1;
+$rowTotal = 0;
 
 $maxRowCount = $_POST['rowCount'];
-$beginRow = $_POST['current'];
+$beginPage = (int) $_POST['current'];
 
-while ($row = mysql_fetch_assoc($result)) {
-    if (($rowCount >= $beginRow) && ($rowCount <= $maxRowCount)) {
+while ($row = mysqli_fetch_assoc($result)) {
+    if ($pageCount == $beginPage)  {
       $member = new StdClass;
       $member->id = $row['member_id'];
-      $member->first_name = utf8_encode($row['first_name']);
-      $member->last_name = utf8_encode($row['last_name']);
-      $member->email = utf8_encode($row['email']);
+      $member->first_name = $row['first_name'];
+      $member->last_name = $row['last_name'];
+      $member->email = $row['email'];
       $memberList[] = $member;
     }
-    $rowCount=$rowCount+1;
+    $rowTotal = $rowTotal + 1;
+    $rowCount = $rowCount+1;
+    if ($rowCount >= $maxRowCount) {
+        $pageCount = $pageCount+1;
+        $rowCount = 1;
+    }
 }
 
 
 $data->rows = $memberList;
-$data->current = $beginRow;
-$data->rowCount = 15;
-$data->total = $rowCount;
+$data->current = $beginPage;
+$data->total = $rowTotal;
 
 echo json_encode($data);
 
-mysql_free_result($result);
-mysql_close();
-
-
-
+mysqli_free_result($result);
+mysqli_close($connection);

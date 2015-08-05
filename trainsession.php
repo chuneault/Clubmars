@@ -110,13 +110,13 @@
             require_once("constant.php");
             connectClubMarsDb();
 
-            $result = mysql_query('select * from trainsessions where session_id = ' . $_GET['sessionId'] .' ') or die(mysql_error());
-            if($row = mysql_fetch_assoc($result)) {
+            $result = mysqli_query($connection, 'select * from trainsessions where session_id = ' . $_GET['sessionId'] .' ') or die(mysqli_error($connection));
+            if($row = mysqli_fetch_assoc($result)) {
               echo 'var trainSession = ' . json_encode($row) . ';';
               $students = $row['students'];
             }
-            mysql_free_result($result);
-            mysql_close();
+            mysqli_free_result($result);
+            mysqli_close($connection );
 
             echo 'loadTrainSession(trainSession);';
          }
@@ -247,19 +247,19 @@
           connectClubMarsDb();
 
           if (($_GET['sessionId'] != null) && ($students != '')){
-            $result = mysql_query('select member_id, first_name, last_name from members where member_id in (' .$students .')') or die(mysql_error());
-            while ($row = mysql_fetch_assoc($result)) {
-               echo "<input type=\"checkbox\" name=\"students[]\" value=\"" .$row['member_id'] ."\" checked disabled>" .utf8_encode($row['first_name'] ." " .$row['last_name']) ."\n" ;
+            $result = mysqli_query($connection, 'select member_id, first_name, last_name from members where member_id in (' .$students .')') or die(mysqli_error($connection));
+            while ($row = mysqli_fetch_assoc($result)) {
+               echo "<input type=\"checkbox\" name=\"students[]\" value=\"" .$row['member_id'] ."\" checked disabled>" .$row['first_name'] ." " .$row['last_name'] ."\n" ;
             }
           }
           else {
-            $result = mysql_query('select member_id, first_name, last_name from members where security_level = -1 order by last_update desc;') or die(mysql_error());
-            while ($row = mysql_fetch_assoc($result)) {
-               echo "<input type=\"checkbox\" name=\"students[]\" value=\"" .$row['member_id'] ."\">" .utf8_encode($row['first_name'] ." " .$row['last_name']) ."\n" ;
+            $result = mysqli_query($connection, 'select member_id, first_name, last_name from members where security_level = -1 order by last_update desc;') or die(mysqli_error($connection));
+            while ($row = mysqli_fetch_assoc($result)) {
+               echo "<input type=\"checkbox\" name=\"students[]\" value=\"" .$row['member_id'] ."\">" .$row['first_name'] ." " .$row['last_name'] ."\n" ;
             }
           }
-          mysql_free_result($result);
-          mysql_close();
+          mysqli_free_result($result);
+          mysqli_close($connection );
 
         ?>
       </p>

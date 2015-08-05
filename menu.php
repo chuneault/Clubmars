@@ -37,7 +37,10 @@
 
     debugger;
 
-    $$SESSION =  <?php echo json_encode($_SESSION, JSON_PRETTY_PRINT) ?>;
+    $$SESSION =
+       <?php
+         echo json_encode($_SESSION, JSON_PRETTY_PRINT)
+       ?>;
 
 
     if (($$SESSION) && ($$SESSION.profil)) {
@@ -110,11 +113,15 @@
           <li id="liprofil" class=""><a href="http://jquery.com/" id="memberprofil" title="Profil du membre"><img src="images/btnprofil.png"></a></li>
           <li id="mnuevents"><a href="events.php"><img src="images/btnevents.png"></a> </li>
           <li id="mnuphotos"><a href="photos.php"><img src="images/btnphotos.png"></a> </li>
-          <li id="mnumembers"><a href="members.php"><img src="images/btnmembers.png"></a> </li>
+          <li id="mnumembers seclevel2"><a href="members.php"><img src="images/btnmembers.png"></a> </li>
           <li class="jq-borderright seclevel2"><a href="contact2.php?members=1" title="Contacter"><img src="images/btnemailmember.png"></a></li>
           <li class=""><a href="#" onclick="closeSession();" title="Fermer"><img src="images/btnclose.png"></a></li>
       </ul>
   </div>
+
+<div id="dialog" style="display: none">
+</div>
+
 
  <div id="top">
    <img class="clublogo" src="images/Logo3.png" height="100px" alt="Club Mars">
@@ -128,6 +135,8 @@
          <li id="mnuforms"><a href="formulaires.php">Formulaires</a> </li>
          <li id="mnuexecutif"><a href="executif.php">Ex&eacute;cutif</a> </li>
          <li id="mnumaps"><a href="maps.php">Terrain</a> </li>
+         <li id="mnumeteostation"><a href="meteostation.php">Station Météo</a> </li>
+
          <li id="mnucontact"><a href="contact2.php">Nous Contacter</a> </li>
          <!--
          <li id="mnucalendar"><a href="calendar.php">Calendrier</a> </li>
@@ -168,8 +177,6 @@
 
 <?php endif; ?>
 
-<div id="dialog" style="display: none">
-</div>
 
 <!--
 <div style="position:fixed; left:0px; bottom:0px; background:url(images/hiver/snow.gif) left top repeat-x; height:247px; width:100%; z-index:-1"> </div>

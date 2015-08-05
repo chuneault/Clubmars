@@ -3,19 +3,15 @@
 
 ?>
 
-  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
   <link rel="stylesheet" type="text/css" href="css/memberprofilemodal.css" />
-  <script src="js/jquery-2.1.3.min.js" type="text/javascript"></script>
   <script type="text/javascript" src="js/jquery.validate.min.js"></script>
   <script type="text/javascript" src="js/jquery.json-2.3.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="css/dot-luv/jquery-ui-1.8.18.custom.css" />
 
   <script src="extra/colorpicker/jquery.colorpicker.js"></script>
   <link href="extra/colorpicker/jquery.colorpicker.css" rel="stylesheet" type="text/css"/>
 
 
   <script type="text/javascript">
-
 
 
   function fillFieldsValue(fieldsList, formName, member) {
@@ -41,7 +37,7 @@
     <?php
 
     if ($_SESSION['profil']['instructor'] != 1) {
-       echo "$(\"#tabs-3\").hide();\n";
+       echo "$(\"#membertabs-3\").hide();\n";
     } else {
       echo "
          $('#member_color').colorpicker({
@@ -55,10 +51,10 @@
     require("constant.php");
     connectClubMarsDb();
 
-    $member = mysql_query('select * from members where member_username = "' . $_SESSION['profil']['member_username'] . '"') or die(mysql_error());
+    $member = mysqli_query($connection, 'select * from members where member_username = "' . $_SESSION['profil']['member_username'] . '"') or die(mysqli_error($connection));
 
 
-    if($row = mysql_fetch_assoc($member))
+    if($row = mysqli_fetch_assoc($member))
     {
        echo 'var member = ' . json_encode($row) . ';';
     }
@@ -66,8 +62,8 @@
     {
     }
 
-    mysql_free_result($member);
-    mysql_close();
+    mysqli_free_result($member);
+    mysqli_close($connection );
 
     ?>
 
@@ -109,55 +105,44 @@
     debugger;
     $.post('update.php', $("#instructorform").serialize(),
        function(data) {
-            if (data.substring(0,8) != '{"result') {
-              $('#resultinstructor').html(data);
+              $('#resultinstructor').html(data.msg);
               $('#resultinstructor').show();
-            }
-            else {
-              var result = jQuery.parseJSON(data);
-              $('#resultinstructor').html(result.msg);
-              $('#resultinstructor').show();
-            }
        }
-    );
+    ).fail(function(msg) {
+         debugger;
+         $('#resultinstructor').html(msg.responseText);
+         $('#resultinstructor').show();
+     });
  }
 
  function submitupdate() {
     debugger;
     $.post('update.php', $("#memberform").serialize(),
        function(data) {
-           debugger;
-            if (data.substring(0,8) != '{"result') {
-              $('#memberform #resultmember').html(data);
+              $('#memberform #resultmember').html(data.msg);
               $('#memberform #resultmember').show();
             }
-            else {
-              var result = jQuery.parseJSON(data);
-              $('#memberform #resultmember').html(result.msg);
-              $('#memberform #resultmember').show();
 
-            }
-       }
-    );
+    ).fail(function(msg) {
+            debugger;
+            $('#memberform #resultmember').html(msg.responseText);
+            $('#memberform #resultmember').show();
+        });
  }
 
 
  function submitupdateprofil() {
   $.post('update.php', $("#profilform").serialize(),
        function(data) {
-         if (data.substring(0,8) != '{"result') {
-              $('#resultprofil').html(data);
+         debugger;
+              $('#resultprofil').html(data.msg);
               $('#resultprofil').show();
-            }
-            else {
-              debugger;
-              var result = jQuery.parseJSON(data);
-              $('#resultprofil').html(result.msg);
-              $('#resultprofil').show();
-
-            }
        }
-    );
+    ).fail(function(msg) {
+          debugger;
+          $('#resultprofil').html(msg.responseText);
+          $('#resultprofil').show();
+      });
  }
 
 
@@ -197,58 +182,55 @@
         }
        );
 
+      debugger;
+
+      $("#member-profile-tabs").tabs();
+
+      function log( message ) {
+          $( "<div/>" ).text( message ).prependTo( "#log" );
+          $( "#log" ).scrollTop( 0 );
+      }
+
+      $( "#city" ).autocomplete({
+          source: function( request, response ) {
+              $.ajax({
+                  url: "http://ws.geonames.org/searchJSON",
+                  dataType: "jsonp",
+                  data: {
+                      country: "CA",
+                      featureClass: "P",
+                      style: "medium",
+                      maxRows: 12,
+                      name_startsWith: request.term
+                  },
+                  success: function( data ) {
+                      response( $.map( data.geonames, function( item ) {
+                          return {
+                              label: item.name + (item.adminName1 ? ", " + item.adminName1 : "") + ", " + item.countryName,
+                              value: item.name
+                          }
+                      }));
+                  }
+              });
+          },
+          minLength: 2,
+          select: function( event, ui ) {
+              log( ui.item ?
+              "Selected: " + ui.item.label :
+              "Nothing selected, input was " + this.value);
+          },
+          open: function() {
+              $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+          },
+          close: function() {
+              $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+          }
+      });
+
+
+
  });
 
-
-
-  //AutoComplete
-  $(function() {
-
-    $( "#tabs" ).tabs();
-
-   function log( message ) {
-      $( "<div/>" ).text( message ).prependTo( "#log" );
-      $( "#log" ).scrollTop( 0 );
-    }
-
-    $( "#city" ).autocomplete({
-      source: function( request, response ) {
-        $.ajax({
-          url: "http://ws.geonames.org/searchJSON",
-          dataType: "jsonp",
-          data: {
-            country: "CA",
-            featureClass: "P",
-						style: "medium",
-						maxRows: 12,
-						name_startsWith: request.term
-					},
-					success: function( data ) {
-						response( $.map( data.geonames, function( item ) {
-							return {
-								label: item.name + (item.adminName1 ? ", " + item.adminName1 : "") + ", " + item.countryName,
-								value: item.name
-							}
-						}));
-					}
-				});
-			},
-			minLength: 2,
-			select: function( event, ui ) {
-				log( ui.item ?
-					"Selected: " + ui.item.label :
-					"Nothing selected, input was " + this.value);
-			},
-			open: function() {
-				$( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
-			},
-			close: function() {
-				$( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
-			}
-		});
-
-
-	});
 
 
 	</script>
@@ -256,18 +238,18 @@
  <div id="member-modal">
 
 
-   <div id="tabs">
+   <div id="member-profile-tabs">
 	  <ul>
-		  <li><a href="#tabs-1">Info Personnel</a></li>
-		  <li><a href="#tabs-2">Profil Internet</a></li>
+		  <li><a href="#membertabs-1">Info Personnel</a></li>
+		  <li><a href="#membertabs-2">Profil Internet</a></li>
 		  <?php
              if ($_SESSION['profil']['instructor'] != 0) {
-               echo "<li><a href=\"#tabs-3\">Profil Instructeur</a></li>\n";
+               echo "<li><a href=\"#membertabs-3\">Profil Instructeur</a></li>\n";
              }
           ?>
 	  </ul>
 
-    <div id="tabs-1">
+    <div id="membertabs-1">
       <form id="memberform" class="editform" method="POST">
        <p>
          <label class="labelfield" for="first_name">Pr&eacute;nom</label>
@@ -322,7 +304,7 @@
 
     </div>
 
-    <div id="tabs-2">
+    <div id="membertabs-2">
      <form id="profilform" class="editform" method="POST">
         <p>
          <label class="labelfield" for="member_username">Utilisateur</label>
@@ -362,7 +344,7 @@
 
    </div>
 
-   <div id="tabs-3">
+   <div id="membertabs-3">
      <form id="instructorform" class="editform" method="POST">
         <p>
          <label class="labelfield" for="member_color">Couleur du chandail</label>

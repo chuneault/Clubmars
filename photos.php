@@ -1,5 +1,6 @@
 <?php
- session_start();
+  header('Content-Type: text/html; charset=utf-8');
+  session_start();
 ?>
 
 <head>
@@ -7,18 +8,14 @@
 
    <link rel="stylesheet" type="text/css" href="mainstyle.css" />
 
+    <script src="js/jquery-2.1.3.min.js" type="text/javascript"></script>
+    <script src="js/jquery-ui-1.9.1.custom.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="css/dot-luv/jquery-ui-1.8.18.custom.css" />
 
-    <script src="js/jquery-1.7.1.min.js" type="text/javascript"></script>
-    <script src="js/jquery-ui-1.8.18.custom.min.js" type="text/javascript"></script>
-
-    <link   href="css/slimbox2.css" rel="stylesheet" type="text/css"/>
-    <script src="js/slimbox2.js" type="text/javascript"></script>
 
     <script src="js/jquery.blockUI.js" type="text/javascript"></script>
-
     <script src="js/jquery.pwi.js" type="text/javascript"></script>
 	<link   href="css/pwi.css" rel="stylesheet" type="text/css"/>
-
 
     <script type="text/javascript">
         $(document).ready(function() {
@@ -44,11 +41,10 @@
       include 'menu.php';
     ?>
 
+      <p>&nbsp;</p>
 
-    <p>&nbsp;</p>
-
-	<div id="photosph">
-	</div>
+	  <div id="photosph">
+	  </div>
 
 
 </body>

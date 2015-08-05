@@ -105,12 +105,12 @@
 
     connectClubMarsDb();
 
-    $result = mysql_query('select * from events where active = 1 order by event_date DESC, event_id DESC;') or die(mysql_error());
+    $result = mysqli_query($connection, 'select * from events where active = 1 order by event_date DESC, event_id DESC;') or die(mysqli_error($connection));
 
-    while ($row = mysql_fetch_assoc($result)) {
+    while ($row = mysqli_fetch_assoc($result)) {
       echo "<div class=\"mainpanel\" style=\"width: 800px\">\n";
       echo "  <div class=\"content\">\n";
-      echo "    <h1>" .utf8_encode($row['title']);
+      echo "    <h1>" .$row['title'];
 
       if ($_SESSION['security'] > 1) {
         echo "<div class='editevent' data-eventid = '" .$row['event_id'] ."'><img class='btnEditEvent' src='images/file_edit.png'><img class='btnDelEvent' src='images/file_delete.png'></div>";
@@ -119,7 +119,7 @@
       echo "<label>" .$row['event_date']   ."</label></h1><p></p>\n";
 
         echo "    <div class=\"contentdesc\">\n";
-      echo "    " .utf8_encode($row['description']) ."\n";
+      echo "    " .$row['description'] ."\n";
       echo "    </div>\n";
       echo "  </div>\n";
       echo "</div>\n";
@@ -127,10 +127,10 @@
 
     // Free the resources associated with the result set
     // This is done automatically at the end of the script
-    mysql_free_result($result);
+    mysqli_free_result($result);
 
     // Close Connection
-    mysql_close();
+    mysqli_close($connection );
 
 ?>
 

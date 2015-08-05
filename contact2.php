@@ -285,7 +285,7 @@
 
 
        <?php
-       if ($_SESSION['security'] > 1) {
+       if (count($_SESSION) > 0 && $_SESSION['security'] > 1) {
          echo '<div><label class="labelfield">Fichier(s) attaché(s) au courriel:</label>';
          echo '<input type="file" name="myfile[]" multiple id="file_upload"></div>';
        }

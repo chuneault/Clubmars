@@ -20,7 +20,7 @@
 			                show: "blind",
 			                hide: "blind",
                       modal: true,
-                      position: [578,174],
+                      position: { my: "center top", at: "center", of: "#top"},
                       resizable: false,
                       closeOnEscape: false,
                       width: 300,
@@ -50,12 +50,14 @@
 
                $.get("member_profile.php", function(data){
                     $('#dialog').html(data);
-                    $('#dialog').attr('title',"Informations du membre");
+
+                   $('#dialog').attr('title',"Informations du membre");
 
                     $( "#dialog" ).dialog({
 		                	autoOpen: true,
 			                show: "blind",
 			                hide: "explode",
+                      position: { my: "center top", at: "center", of: "#top"},
                       modal: true,
                       closeOnEscape: false,
                       width: 610,
@@ -66,7 +68,7 @@
                 });
               });
             }
-         }
+         };
 
          member.init();
 
